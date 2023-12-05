@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header">
+        <h5>Danh sách sản phẩm <button type="button" class="btn btn-primary badge" (click)="onNewProduct()">Thêm</button></h5>
+    </div>
+    <div class="list-group list-group-flush">
+        <app-product-item 
+        *ngFor="let product of products" 
+        [product]="product" 
+        [id]="product.id"
+        ></app-product-item>
+      </div>
+</div>

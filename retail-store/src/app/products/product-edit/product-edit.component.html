@@ -1,0 +1,101 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">  
+      <div class="row mb-3">
+        <label for="name" class="col-sm-2 col-form-label">Tên sản phẩm</label>
+        <div class="col-sm-10">
+          <input type="text" id="name" class="form-control" formControlName="name"
+            [ngClass]="{
+              'is-valid': productForm.get('name').touched && productForm.get('name').valid, 
+              'is-invalid': productForm.get('name').touched && productForm.get('name').invalid}"
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="unitOfRetail" class="col-sm-2 col-form-label">Đơn vị bán lẻ</label>
+        <div class="col-sm-10">
+          <input type="text" id="unitOfRetail" class="form-control" formControlName="unitOfRetail"
+            [ngClass]="{
+              'is-valid': productForm.get('unitOfRetail').touched && productForm.get('unitOfRetail').valid, 
+              'is-invalid': productForm.get('unitOfRetail').touched && productForm.get('unitOfRetail').invalid}"
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="priceOfRetail" class="col-sm-2 col-form-label">Giá bán lẻ</label>
+        <div class="col-sm-10">
+          <input type="number" id="priceOfRetail" class="form-control" formControlName="priceOfRetail"
+          [ngClass]="{
+            'is-valid': productForm.get('priceOfRetail').touched && productForm.get('priceOfRetail').valid, 
+            'is-invalid': productForm.get('priceOfRetail').touched && productForm.get('priceOfRetail').invalid}"
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="imagePath" class="col-sm-2 col-form-label">Đường dẫn ảnh</label>
+        <div class="col-sm-10">
+          <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagePath>
+        </div>
+      </div>
+      <div class="row mb-3">
+          <div class="text-center">
+            <img class="rounded" style="max-width: 250px;" [src]="imagePath.value">
+          </div>
+      </div>
+      <div class="row mb-3 card">
+        <div class="card-header">
+          <h5>Danh sách nhà cung cấp <button type="button" class="btn btn-primary badge" (click)="onAddProvider()">Thêm</button></h5>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: center;">#</th>
+                <th scope="col">Tên nhà cung cấp</th>
+                <th scope="col">Đơn vị nhập sỉ</th>
+                <th scope="col">Giá nhập sỉ</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="providers">
+              <tr *ngFor="let providerControl of providersControls; index as i"
+              [formGroupName]="i">
+                <td style="vertical-align: middle;">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteProvider(i)">X</button>
+                </td>
+                <td>
+                  <input type="text" class="form-control" formControlName="name"
+                    [ngClass]="{
+                      'is-valid': providerControl.get('name').touched && providerControl.get('name').valid, 
+                      'is-invalid': providerControl.get('name').touched && providerControl.get('name').invalid}"
+                  >            
+                </td>
+                <td>
+                  <input type="text" class="form-control" formControlName="unitOfWholesale"
+                    [ngClass]="{
+                      'is-valid': providerControl.get('unitOfWholesale').touched && providerControl.get('unitOfWholesale').valid, 
+                      'is-invalid': providerControl.get('unitOfWholesale').touched && providerControl.get('unitOfWholesale').invalid}"
+                  >            
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="priceOfWholesale"
+                    [ngClass]="{
+                      'is-valid': providerControl.get('priceOfWholesale').touched && providerControl.get('priceOfWholesale').valid, 
+                      'is-invalid': providerControl.get('priceOfWholesale').touched && providerControl.get('priceOfWholesale').invalid}"
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">Lưu</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Hủy</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

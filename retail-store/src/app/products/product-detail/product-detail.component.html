@@ -1,0 +1,60 @@
+<div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid rounded-start" [src]="product.imagePath" alt="{{ product.name }}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ product.name }} 
+                <span class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Hành động
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a role="button" class="dropdown-item" (click)="onEditProduct()">Sửa</a></li>
+                      <li><a role="button" class="dropdown-item" (click)="onDeleteProduct()">Xóa</a></li>
+                    </ul>
+                </span>
+            </h5>
+            <form class="card-text">
+                <div class="row">
+                    <label for="unitOfRetail" class="col-auto col-form-label">Đơn vị bán lẻ</label>
+                    <div class="col-auto">
+                      <input id="unitOfRetail"  type="text" readonly class="form-control-plaintext" value="{{ product.unitOfRetail }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="priceOfRetail" class="col-auto col-form-label">Giá bán lẻ</label>
+                    <div class="col-auto">
+                      <input id="priceOfRetail"  type="text" readonly class="form-control-plaintext" value="{{ product.priceOfRetail | currency: 'VND' }}">
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    <div class="row g-0">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tên nhà cung cấp</th>
+                    <th scope="col">Đơn vị nhập sỉ</th>
+                    <th scope="col">Giá nhập sỉ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let provider of product.providers; index as stt">
+                    <th scope="row">{{ stt + 1 }}</th>
+                    <td>{{ provider.name }}</td>
+                    <td>{{ provider.unitOfWholesale }}</td>
+                    <td>{{ provider.priceOfWholesale }}</td>
+                  </tr>
+                  <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

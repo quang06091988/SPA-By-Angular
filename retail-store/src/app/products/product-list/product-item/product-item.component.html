@@ -1,0 +1,6 @@
+<a class="list-group-item list-group-item-action" routerLinkActive="list-group-item-secondary" [routerLink]="[id]">
+    <h6>
+        {{ product.name }}
+        <small class="text-muted">{{ product.priceOfRetail | currency: 'VND' }}/{{ product.unitOfRetail }}</small>
+    </h6>
+</a>
